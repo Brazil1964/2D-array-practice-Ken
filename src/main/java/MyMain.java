@@ -94,26 +94,26 @@ public class MyMain {
     // Remember that the array is sorted!
 
     public static double mode(double[][] mat) {
-        HashMap<Double, Integer>temp_map = new HashMap<Double, Integer>();
+        double max_count = 0;
+        double current_num = mat[0][0];
+        double current_count = 0;
+        double max_num = mat[0][0];
         for (double [] arr : mat){
             for (double i : arr){
-                if (temp_map.containsKey(i)){
-                    temp_map.put(i, temp_map.get(i) + 1);
+                if (i == current_num){
+                    current_count++;
                 }
                 else{
-                    temp_map.put(i, 1);
+                    if (current_count > max_count){
+                        max_count = current_count;
+                        max_num = current_num;
+                    }
+                    current_num = i;
+                    current_count = 1;
                 }
             }
         }
-        double max_key = 0;
-        int max_val = 0;
-        for (double key : temp_map.keySet()){
-            if (temp_map.get(key) > max_val){
-                max_val = temp_map.get(key);
-                max_key = key;
-            }
-        }
-        return max_key;
+        return max_num;
     }
 
 
